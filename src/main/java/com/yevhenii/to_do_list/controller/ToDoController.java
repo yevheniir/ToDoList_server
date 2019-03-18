@@ -1,5 +1,6 @@
 package com.yevhenii.to_do_list.controller;
 
+import com.yevhenii.to_do_list.exception.ListAlreadyExistException;
 import com.yevhenii.to_do_list.model.List;
 import com.yevhenii.to_do_list.model.Task;
 import com.yevhenii.to_do_list.service.ToDoService;
@@ -23,8 +24,13 @@ public class ToDoController {
 
     @PostMapping(value="/lists")
     @ResponseBody
-    List addlist(@RequestBody List list) {
-        return toDoService.addList(list);
+    List addlist(@RequestBody List list) throws ListAlreadyExistException {
+        try {
+            return toDoService.addList(list);
+        } catch(ListAlreadyExistException e) {
+            throw e;
+        }
+
     }
 
     @PutMapping(value="/lists/{id}")
@@ -59,8 +65,12 @@ public class ToDoController {
 
     @DeleteMapping(value="/tasks/{id}")
     @ResponseBody
-    void deleteTask(@PathVariable int id) {
-         toDoService.deleteTask(id);
-    }
+    void deleteTask(@PathVariable int id) throws Exception {
+        try {
+            toDoService.deleteTask(id);
+        } catch (Exception e) {
+            throw e;
+        }
 
+    }
 }

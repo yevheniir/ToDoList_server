@@ -1,13 +1,13 @@
 package com.yevhenii.to_do_list.service;
 
+import com.yevhenii.to_do_list.exception.ListAlreadyExistException;
+import com.yevhenii.to_do_list.exception.NotContentException;
 import com.yevhenii.to_do_list.model.List;
 import com.yevhenii.to_do_list.model.Task;
 import com.yevhenii.to_do_list.repository.ListRepository;
 import com.yevhenii.to_do_list.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class ToDoService {
@@ -27,8 +27,11 @@ public class ToDoService {
         return listRepository.findAll();
     }
 
-    public List addList(List list) {
-        return listRepository.save(list);
+    public List addList(List list) throws ListAlreadyExistException {
+        if (listRepository.findById(list.getId()) == null) {
+            return listRepository.save(list);
+        }
+        throw new ListAlreadyExistException();
     }
 
     public List changeList(List list) {
@@ -52,7 +55,12 @@ public class ToDoService {
 
     }
 
-    public void deleteTask(int id) {
-        taskRepository.deleteById(id);
+    public void deleteTask(int id) throws NotContentException {
+        try {
+            taskRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new NotContentException();
+        }
+
     }
 }
