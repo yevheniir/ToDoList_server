@@ -16,9 +16,15 @@ public class ToDoController {
     @Autowired
     ToDoService toDoService;
 
+    @GetMapping(value="/string")
+    @ResponseBody
+    String hi() {
+        return "hello world";
+    }
+
     @GetMapping(value="/lists")
     @ResponseBody
-    ArrayList<List> getLists() {
+    java.util.List<com.yevhenii.to_do_list.model.List> getLists() {
         return toDoService.getLists();
     }
 

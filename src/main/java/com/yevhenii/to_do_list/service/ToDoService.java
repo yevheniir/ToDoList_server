@@ -2,16 +2,24 @@ package com.yevhenii.to_do_list.service;
 
 import com.yevhenii.to_do_list.List;
 import com.yevhenii.to_do_list.Task;
+import com.yevhenii.to_do_list.repository.ListRepository;
+import com.yevhenii.to_do_list.repository.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @Service
 public class ToDoService {
     private static ArrayList<List> lists = new ArrayList<List>();
     private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static int taskId = 0;
+
+    @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
+    private ListRepository listRepository;
 
     static {
         lists.add(new List("mainList", false));
@@ -25,8 +33,9 @@ public class ToDoService {
 
     }
 
-    public ArrayList<List> getLists() {
-        return lists;
+    public java.util.List<com.yevhenii.to_do_list.model.List> getLists() {
+        return listRepository.findAll();
+//        return lists;
     }
 
     public List addList(List list) {
