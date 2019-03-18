@@ -22,11 +22,11 @@ class LoadDatabase {
 //        };
 //    }
 
-    @Bean
-    CommandLineRunner initDatabase(TaskRepository repository) {
-        return args -> {
-            repository.save(new Task("mainList", "first task", false));
-            repository.save(new Task("mainList", "second task", false));
-        };
-    }
+//    @Bean
+//    CommandLineRunner initDatabase(TaskRepository repository) {
+//        return args -> {
+//            repository.save(new Task("mainList", "first task", false));
+//            repository.save(new Task("mainList", "second task", false));
+//        };
+//    }
 }

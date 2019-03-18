@@ -1,17 +1,15 @@
 package com.yevhenii.to_do_list.model;
 
-import lombok.Data;
 
 import javax.persistence.*;
 
-//@Data
 @Entity
 @Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "list_id")
     private String listId;
@@ -31,11 +29,11 @@ public class Task {
         this.complete = complete;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

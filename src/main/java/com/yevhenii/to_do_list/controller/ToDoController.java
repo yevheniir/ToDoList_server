@@ -1,13 +1,12 @@
 package com.yevhenii.to_do_list.controller;
 
-import com.yevhenii.to_do_list.List;
-import com.yevhenii.to_do_list.Task;
+import com.yevhenii.to_do_list.model.List;
+import com.yevhenii.to_do_list.model.Task;
 import com.yevhenii.to_do_list.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 
 @Controller
 @CrossOrigin
@@ -15,12 +14,6 @@ public class ToDoController {
 
     @Autowired
     ToDoService toDoService;
-
-    @GetMapping(value="/string")
-    @ResponseBody
-    String hi() {
-        return "hello world";
-    }
 
     @GetMapping(value="/lists")
     @ResponseBody
@@ -36,19 +29,19 @@ public class ToDoController {
 
     @PutMapping(value="/lists/{id}")
     @ResponseBody
-    List changeList(@RequestBody List list, @PathVariable String id) {
-        return toDoService.changeList(id, list);
+    List changeList(@RequestBody List list) {
+        return toDoService.changeList(list);
     }
 
     @DeleteMapping(value="/lists/{id}")
     @ResponseBody
-    List deleteList(@PathVariable String id) {
-        return toDoService.deleteList(id);
+    void deleteList(@PathVariable String id) {
+        toDoService.deleteList(id);
     }
 
     @GetMapping(value="/tasks")
     @ResponseBody
-    ArrayList<Task> getTasks() {
+    java.util.List<Task> getTasks() {
         return toDoService.getTasks();
     }
 
@@ -60,14 +53,14 @@ public class ToDoController {
 
     @PutMapping(value="/tasks/{id}")
     @ResponseBody
-    Task changeTask(@RequestBody Task task, @PathVariable int id) {
-        return toDoService.changeTask(id, task);
+    Task changeTask(@RequestBody Task task) {
+        return toDoService.changeTask(task);
     }
 
     @DeleteMapping(value="/tasks/{id}")
     @ResponseBody
-    Task deleteTask(@PathVariable int id) {
-        return toDoService.deleteTask(id);
+    void deleteTask(@PathVariable int id) {
+         toDoService.deleteTask(id);
     }
 
 }

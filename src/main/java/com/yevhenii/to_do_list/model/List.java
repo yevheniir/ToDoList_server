@@ -1,10 +1,8 @@
 package com.yevhenii.to_do_list.model;
 
-import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
 @Entity
 @Table(name = "lists")
 public class List {
