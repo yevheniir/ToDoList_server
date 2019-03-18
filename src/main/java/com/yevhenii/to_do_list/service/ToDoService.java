@@ -14,7 +14,7 @@ public class ToDoService {
     private static int taskId = 0;
 
     static {
-        lists.add(new List("mainlist", false));
+        lists.add(new List("mainList", false));
         lists.add(new List("newList", false));
 
         tasks.add(new Task("mainList", taskId++, "first task", false));
