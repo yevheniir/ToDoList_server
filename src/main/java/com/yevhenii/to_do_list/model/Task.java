@@ -8,16 +8,12 @@ import javax.persistence.*;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "list_id")
     private String listId;
 
-    @Column(name = "text")
     private String text;
 
-    @Column(name = "complete")
     private boolean complete;
 
     public Task() {

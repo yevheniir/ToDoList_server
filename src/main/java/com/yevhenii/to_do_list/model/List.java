@@ -6,10 +6,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "lists")
 public class List {
+
     @Id
-    @Column(name = "id")
     private String id;
-    @Column(name = "pin")
+
     private boolean pin;
 
     public List() {

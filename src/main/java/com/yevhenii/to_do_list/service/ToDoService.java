@@ -20,7 +20,6 @@ public class ToDoService {
 
 
     public ToDoService() {
-
     }
 
     public java.util.List<com.yevhenii.to_do_list.model.List> getLists() {
