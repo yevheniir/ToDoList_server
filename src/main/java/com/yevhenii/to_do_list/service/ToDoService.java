@@ -56,11 +56,10 @@ public class ToDoService {
     }
 
     public void deleteTask(int id) throws NotContentException {
-        try {
+        if (taskRepository.findById(id).isPresent()) {
             taskRepository.deleteById(id);
-        } catch (Exception e) {
+        } else {
             throw new NotContentException();
         }
-
     }
 }
