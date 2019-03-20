@@ -29,7 +29,8 @@ public class TokenAuthConfig extends WebSecurityConfigurerAdapter {
                 .antMatcher("/api/user")
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.POST, "/api/user").anonymous()
-                .anyRequest().authenticated()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .addFilterBefore(authFilter(), RequestHeaderAuthenticationFilter.class)
                 .authenticationProvider(preAuthProvider())
@@ -38,6 +39,7 @@ public class TokenAuthConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
+
 
     @Bean
     public TokenAuthenticationFilter authFilter() {

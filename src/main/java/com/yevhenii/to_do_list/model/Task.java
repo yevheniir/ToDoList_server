@@ -2,18 +2,23 @@ package com.yevhenii.to_do_list.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private int id;
 
+    @NotNull
     private String listId;
 
+    @NotNull
     private String text;
 
+    @NotNull
     private boolean complete;
 
     public Task() {

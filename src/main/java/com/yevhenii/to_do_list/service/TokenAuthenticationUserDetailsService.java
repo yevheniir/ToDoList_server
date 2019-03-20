@@ -31,7 +31,8 @@ public class TokenAuthenticationUserDetailsService implements AuthenticationUser
             } catch (InvalidClaimException ex) {
                 throw new UsernameNotFoundException("Token has been expired", ex);
             }
-            return (UserDetails) new TokenUserDetails(token.getSubject(), token.getClaim("usr").asString(), (String) authentication.getCredentials(), token.getToken(), true, token
+            return (UserDetails) new TokenUserDetails(token.getSubject(), token.getClaim("usr").asString(),
+                    (String) authentication.getCredentials(), token.getToken(), true, token
                     .getClaim("role")
                     .asList(String.class)
                     .stream()

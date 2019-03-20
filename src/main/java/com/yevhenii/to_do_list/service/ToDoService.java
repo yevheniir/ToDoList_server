@@ -61,4 +61,10 @@ public class ToDoService {
             throw new NotContentException();
         }
     }
+
+    //////////////////////REALIZE IT !!!!!!!!!!!!!!!!!!!!!!!!/////////////////////////////////////////////////////////
+
+    public java.util.List<List> getListsAndNotSolvedTasks() {
+        return null;
+    }
 }

@@ -32,10 +32,15 @@ public class UsernamePasswordDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         logger.debug("Trying to authenticate ", email);
-        return getUserDetails(userService.findByEmail(email));
+        try {
+            return getUserDetails(userService.findByEmail(email));
+        } catch (TokenCreationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    private TokenUserDetails getUserDetails(User user) {
+    private TokenUserDetails getUserDetails(User user) throws TokenCreationException {
         return new TokenUserDetails(
                 user.getEmail(),
                 user.getUsername(),

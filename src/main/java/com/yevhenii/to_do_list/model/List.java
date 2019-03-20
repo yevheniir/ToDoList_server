@@ -2,14 +2,17 @@ package com.yevhenii.to_do_list.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "lists")
 public class List {
 
     @Id
+    @NotNull
     private String id;
 
+    @NotNull
     private boolean pin;
 
     public List() {
