@@ -1,8 +1,14 @@
 package com.yevhenii.to_do_list.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "lists")
@@ -14,6 +20,19 @@ public class List {
 
     @NotNull
     private boolean pin;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="list")
+//    @JoinColumn(name="tasks")
+    private Set<Task> tasks = new HashSet<>();
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     public List() {
     }

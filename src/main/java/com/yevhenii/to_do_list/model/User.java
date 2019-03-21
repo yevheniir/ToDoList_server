@@ -17,6 +17,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private boolean enabled;
+
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "email", referencedColumnName = "email")
     private List<Role> roles;

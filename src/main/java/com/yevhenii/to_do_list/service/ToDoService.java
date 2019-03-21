@@ -3,11 +3,14 @@ package com.yevhenii.to_do_list.service;
 import com.yevhenii.to_do_list.exception.ListAlreadyExistException;
 import com.yevhenii.to_do_list.exception.NotContentException;
 import com.yevhenii.to_do_list.model.List;
+import com.yevhenii.to_do_list.model.OutputTask;
 import com.yevhenii.to_do_list.model.Task;
 import com.yevhenii.to_do_list.repository.ListRepository;
 import com.yevhenii.to_do_list.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class ToDoService {
@@ -41,16 +44,32 @@ public class ToDoService {
         listRepository.delete(listRepository.findById(id));
     }
 
-    public java.util.List<Task> getTasks() {
-        return taskRepository.findAll();
+    public ArrayList<OutputTask> getTasks() {
+        java.util.List<Task> t = taskRepository.findAll();
+
+        ArrayList<OutputTask> outputTasks = new ArrayList<OutputTask>();
+
+        for (Task task : t) {
+            outputTasks.add(new OutputTask(task.getId(), task.getList().getId(), task.getText(), task.isComplete()));
+        }
+
+        return outputTasks;
     }
 
-    public Task addTask(Task task) {
-        return taskRepository.save(task);
+    public OutputTask addTask(Task task) {
+        Task t = taskRepository.save(task);
+
+        OutputTask outputTask = new OutputTask(t.getId(), t.getList().getId(), t.getText(), t.isComplete());
+
+        return outputTask;
     }
 
-    public Task changeTask(Task task) {
-        return taskRepository.save(task);
+    public OutputTask changeTask(Task task) {
+        Task t = taskRepository.save(task);
+
+        OutputTask outputTask = new OutputTask(t.getId(), t.getList().getId(), t.getText(), t.isComplete());
+
+        return outputTask;
 
     }
 
@@ -65,6 +84,6 @@ public class ToDoService {
     //////////////////////REALIZE IT !!!!!!!!!!!!!!!!!!!!!!!!/////////////////////////////////////////////////////////
 
     public java.util.List<List> getListsAndNotSolvedTasks() {
-        return null;
+        return listRepository.getListsAndNotSolvedTasks();
     }
 }

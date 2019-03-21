@@ -2,10 +2,13 @@ package com.yevhenii.to_do_list.controller;
 
 import com.yevhenii.to_do_list.exception.ListAlreadyExistException;
 import com.yevhenii.to_do_list.model.List;
+import com.yevhenii.to_do_list.model.OutputTask;
 import com.yevhenii.to_do_list.model.Task;
 import com.yevhenii.to_do_list.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 
 @RestController
@@ -40,17 +43,18 @@ public class ToDoController {
     }
 
     @GetMapping(value="/tasks")
-    java.util.List<Task> getTasks() {
+    ArrayList<OutputTask> getTasks() {
         return toDoService.getTasks();
     }
 
     @PostMapping(value="/tasks")
-    Task addTask(@RequestBody Task task) {
-        return toDoService.addTask(task);
+    OutputTask addTask(@RequestBody Task task) {
+        OutputTask t = toDoService.addTask(task);
+        return t;
     }
 
     @PutMapping(value="/tasks/{id}")
-    Task changeTask(@RequestBody Task task) {
+    OutputTask changeTask(@RequestBody Task task) {
         return toDoService.changeTask(task);
     }
 

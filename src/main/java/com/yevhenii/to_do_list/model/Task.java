@@ -1,6 +1,10 @@
 package com.yevhenii.to_do_list.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -13,7 +17,11 @@ public class Task {
     private int id;
 
     @NotNull
-    private String listId;
+//    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn
+    private List list;
 
     @NotNull
     private String text;
@@ -24,8 +32,8 @@ public class Task {
     public Task() {
     }
 
-    public Task(String listId, String text, boolean complete) {
-        this.listId = listId;
+    public Task(List list, String text, boolean complete) {
+        this.list = list;
         this.text = text;
         this.complete = complete;
     }
@@ -38,12 +46,12 @@ public class Task {
         this.id = id;
     }
 
-    public String getListId() {
-        return listId;
+    public List getList() {
+        return list;
     }
 
-    public void setListId(String listId) {
-        this.listId = listId;
+    public void setList(List list) {
+        this.list = list;
     }
 
     public String getText() {
@@ -66,7 +74,7 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "id='" + id + '\'' +
-                ", listId='" + listId + '\'' +
+                ", listId='" + list + '\'' +
                 ", text='" + text + '\'' +
                 ", complete=" + complete +
                 '}';
