@@ -84,6 +84,7 @@ public class ToDoService {
     //////////////////////REALIZE IT !!!!!!!!!!!!!!!!!!!!!!!!/////////////////////////////////////////////////////////
 
     public java.util.List<List> getListsAndNotSolvedTasks() {
-        return listRepository.getListsAndNotSolvedTasks();
+//        return listRepository.getListsAndNotSolvedTasks();
+        return listRepository.findAll();
     }
 }

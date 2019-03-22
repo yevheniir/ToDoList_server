@@ -11,6 +11,9 @@ public interface ListRepository extends JpaRepository<List, Integer>{
     List findById(String boo);
 
 //    @Query("SELECT u FROM List u LEFT JOIN FETCH Task")
-    @Query("SELECT l FROM List l JOIN l.tasks t WHERE t.complete = false")
-    java.util.List<List> getListsAndNotSolvedTasks();
+//    @Query("SELECT DISTINCT l FROM List l JOIN l.tasks t WHERE t.complete = false")
+//    java.util.List<List> getListsAndNotSolvedTasks();
+
+
+
 }

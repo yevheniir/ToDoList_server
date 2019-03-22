@@ -2,6 +2,7 @@ package com.yevhenii.to_do_list.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -11,11 +12,14 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tasks")
 public class Task {
+
+    @JsonView(View.Public.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private int id;
 
+    @JsonView(View.Common.class)
     @NotNull
 //    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -23,9 +27,11 @@ public class Task {
     @JoinColumn
     private List list;
 
+    @JsonView(View.Public.class)
     @NotNull
     private String text;
 
+    @JsonView(View.Public.class)
     @NotNull
     private boolean complete;
 

@@ -14,14 +14,16 @@ import java.util.Set;
 @Table(name = "lists")
 public class List {
 
+    @JsonView(View.Public.class)
     @Id
     @NotNull
     private String id;
 
+    @JsonView(View.Public.class)
     @NotNull
     private boolean pin;
 
-    @JsonIgnore
+    @JsonView(View.ListsTasks.class)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="list")
 //    @JoinColumn(name="tasks")
     private Set<Task> tasks = new HashSet<>();
